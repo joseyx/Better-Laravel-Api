@@ -63,7 +63,7 @@ class AuthController extends Controller
     }
 
     public function user(Request $request): JsonResponse {
-        return response()->json($request->user());
+        return response()->json($request->user()->load('extraData'));
     }
 
     public function logout(Request $request): JsonResponse {
