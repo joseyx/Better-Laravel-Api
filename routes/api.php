@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\FullUserDataController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Middleware\ThrottleRequests;
@@ -24,6 +25,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::group(['prefix' => 'dashboard'], function () {
     Route::get('users', [UserController::class, 'index']);
+    Route::get('user/{id}', [UserController::class, 'show']);
+    Route::post('user/{id}', [UserController::class, 'update']);
 });
 
 Route::group(['prefix' => 'auth'], function () {
