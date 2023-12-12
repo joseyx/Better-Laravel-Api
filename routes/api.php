@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FullUserDataController;
+use App\Http\Controllers\SalaDeCineController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Middleware\ThrottleRequests;
@@ -27,6 +28,10 @@ Route::group(['prefix' => 'dashboard'], function () {
     Route::get('users', [UserController::class, 'index']);
     Route::get('user/{id}', [UserController::class, 'show']);
     Route::post('user/{id}', [UserController::class, 'update']);
+    Route::post('sala/create', [SalaDeCineController::class, 'create']);
+    Route::post('sala/update/{id}', [SalaDeCineController::class, 'update']);
+    Route::get('sala/{id}', [SalaDeCineController::class, 'show']);
+    Route::get('salas', [SalaDeCineController::class, 'index']);
 });
 
 Route::group(['prefix' => 'auth'], function () {
