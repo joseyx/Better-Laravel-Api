@@ -18,6 +18,7 @@ class AuthController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password'=> Hash::make($request->password)
+
         ]);
 
         //check if email is already registered
@@ -30,6 +31,15 @@ class AuthController extends Controller
         if ($user->save()) {
             $tokenResult = $user->createToken('Personal Access Token');
             $token = $tokenResult->plainTextToken;
+
+            $user->extraData()->create([
+                'lastName' =>'',
+                'cedula' =>'',
+                'telefono' =>'',
+                'direccion' =>'',
+                'ciudad' =>'',
+                'estado' =>'',
+            ]);
 
             return response()->json([
                 'message'=> 'Usuario creado',
@@ -63,7 +73,7 @@ class AuthController extends Controller
     }
 
     public function user(Request $request): JsonResponse {
-        return response()->json($request->user()->load('extraData'));
+        return response()->json($request->user());
     }
 
     public function logout(Request $request): JsonResponse {
