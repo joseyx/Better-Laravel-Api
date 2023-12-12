@@ -14,19 +14,19 @@ class AuthController extends Controller
     //
     public function register(Request $request): JsonResponse {
 
+        //check if user is already registered
+        if(User::where('email', $request->email)->first()) {
+            return response()->json([
+                'message'=> 'El usuario ya existe',
+            ], 400);
+        }
+
         $user = new User([
             'name' => $request->name,
             'email' => $request->email,
             'password'=> Hash::make($request->password)
 
         ]);
-
-        //check if email is already registered
-        if(User::where('email', $request->email)->first()){
-            return response()->json([
-                'message'=> 'El correo ya esta registrado',
-            ], 400);
-        }
 
         if ($user->save()) {
             $tokenResult = $user->createToken('Personal Access Token');
@@ -39,6 +39,7 @@ class AuthController extends Controller
                 'direccion' =>'',
                 'ciudad' =>'',
                 'estado' =>'',
+                'foto' =>'',
             ]);
 
             return response()->json([
