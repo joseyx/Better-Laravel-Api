@@ -14,8 +14,6 @@ class FullUserDataController extends Controller
 {
     //
     public function store(Request $request) {
-        // Process and save the image
-        $imagePath = $this->processAndSaveImage($request->file('image'));
 
         $userId = $request->user_id;
 
@@ -34,19 +32,11 @@ class FullUserDataController extends Controller
             'direccion' => $request->direccion,
             'ciudad' => $request->ciudad,
             'estado' => $request->estado,
-            'foto' => $imagePath
         ]);
 
         return response()->json([
             'message' => 'User data created'
         ], 201);
 
-    }
-
-    private function processAndSaveImage($image)
-    {
-        $imagePath = $image->store('storage/images');
-
-        return $imagePath;
     }
 }
