@@ -10,10 +10,6 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    public function extraData()
-    {
-        return $this->hasOne(Full_User_Data::class);
-    }
 
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -26,6 +22,13 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'lastName',
+        'cedula',
+        'telefono',
+        'direccion',
+        'ciudad',
+        'estado',
+        'foto',
     ];
 
     /**
