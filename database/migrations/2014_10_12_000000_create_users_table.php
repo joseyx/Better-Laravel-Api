@@ -17,6 +17,14 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('rol')->nullable()->default('Cliente');
+            $table->string('lastName')->default(' ');
+            $table->string('cedula')->default(' ');
+            $table->string('telefono')->default(' ');
+            $table->string('direccion')->default(' ');
+            $table->string('ciudad')->default(' ');
+            $table->string('estado')->default(' ');
+            $table->string('foto')->default(' ');
             $table->rememberToken();
             $table->timestamps();
         });
