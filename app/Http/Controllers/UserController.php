@@ -9,20 +9,12 @@ class UserController extends Controller
 {
     //check if user has extradata
     public function index() {
-        $users = User::with('extraData')->get();
 
-        $usersWithoutExtraData = $users->filter(function ($user) {
-            return $user->extraData === null;
-        });
-
-        $usersWithExtraData = $users->filter(function ($user) {
-            return $user->extraData !== null;
-        });
-
-        $mixedUsers = $usersWithExtraData->concat($usersWithoutExtraData);
+        //get all users without extradata
+        $users = User::all();
 
         return response()->json([
-            'users' => $mixedUsers
+            'users' => $users
         ], 200);
     }
 
@@ -30,7 +22,8 @@ class UserController extends Controller
     public function show($id) {
 
 
-        $user = User::with('extraData')->find($id);
+        //find user by id
+        $user = User::find($id);
 
         if (!$user) {
             return response()->json([
@@ -55,13 +48,13 @@ class UserController extends Controller
 
         $user->name = $request->name;
         $user->email = $request->email;
-
-        $user->extraData->lastName = $request->lastName;
-        $user->extraData->cedula = $request->cedula;
-        $user->extraData->telefono = $request->telefono;
-        $user->extraData->direccion = $request->direccion;
-        $user->extraData->ciudad = $request->ciudad;
-        $user->extraData->estado = $request->estado;
+        $user->lastName = $request->lastName;
+        $user->cedula = $request->cedula;
+        $user->telefono = $request->telefono;
+        $user->direccion = $request->direccion;
+        $user->ciudad = $request->ciudad;
+        $user->estado = $request->estado;
+        $user->foto = $request->foto;
 
         $user->save();
 
