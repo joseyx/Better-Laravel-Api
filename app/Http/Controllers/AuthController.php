@@ -32,16 +32,6 @@ class AuthController extends Controller
             $tokenResult = $user->createToken('Personal Access Token');
             $token = $tokenResult->plainTextToken;
 
-            $user->extraData()->create([
-                'lastName' =>'',
-                'cedula' =>'',
-                'telefono' =>'',
-                'direccion' =>'',
-                'ciudad' =>'',
-                'estado' =>'',
-                'foto' =>'',
-            ]);
-
             return response()->json([
                 'message'=> 'Usuario creado',
                 'token'=> $token,
