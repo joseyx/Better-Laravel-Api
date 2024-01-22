@@ -21,12 +21,12 @@ class AuthController extends Controller
             ], 400);
         }
 
-        $user = new User([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password'=> Hash::make($request->password)
+        $user = new User();
 
-        ]);
+        $user->name = $request->name;
+        $user->email = $request->email;
+
+        $user->password = Hash::make($request->password);
 
         if ($user->save()) {
             $tokenResult = $user->createToken('Personal Access Token');

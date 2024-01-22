@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('generos', function (Blueprint $table) {
-            $table->id();
-            $table->string('genero')->unique();
-            $table->timestamps();
+        Schema::table('peliculas', function (Blueprint $table) {
+            //
+            $table->string('color_extra2');
+            $table->string('Genero');
         });
     }
 
@@ -23,6 +23,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('genero');
+        Schema::table('peliculas', function (Blueprint $table) {
+            //
+        });
     }
 };

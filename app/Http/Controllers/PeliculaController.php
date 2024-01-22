@@ -32,7 +32,13 @@ class PeliculaController extends Controller
             'nombre' => $request->nombre,
             'sinopsis' => $request->sinopsis,
             'fecha_estreno' => $request->fecha_estreno,
+            'genero' => $request->genero,
             'poster' => $request->poster,
+            'color_fondo' => $request->color_fondo,
+            'color_texto' => $request->color_texto,
+            'color_botones' => $request->color_botones,
+            'color_extra1' => $request->color_extra1,
+            'color_extra2' => $request->color_extra2,
         ]);
 
         // Guarda la pelicula
@@ -76,6 +82,11 @@ class PeliculaController extends Controller
         $pelicula->sinopsis = $request->sinopsis;
         $pelicula->fecha_estreno = $request->fecha_estreno;
         $pelicula->poster = $request->poster;
+        $pelicula->color_fondo = $request->color_fondo;
+        $pelicula->color_texto = $request->color_texto;
+        $pelicula->color_botones = $request->color_botones;
+        $pelicula->color_extra = $request->color_extra;
+        $pelicula->color_extra2 = $request->color_extra2;
 
         $pelicula->save();
 

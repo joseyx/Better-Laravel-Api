@@ -10,7 +10,7 @@ class UserController extends Controller
     //check if user has extradata
     public function index() {
 
-        //get all users without extradata
+        //get all users
         $users = User::all();
 
         return response()->json([

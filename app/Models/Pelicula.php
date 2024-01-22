@@ -12,15 +12,17 @@ class Pelicula extends Model
 
     protected $fillable = [
         'nombre',
+        'genero',
         'sinopsis',
         'poster',
         'fecha_estreno',
+        'color_fondo',
+        'color_texto',
+        'color_botones',
+        'color_extra1',
+        'color_extra2',
     ];
 
     use HasFactory;
 
-    public function generos(): BelongsToMany
-    {
-        return $this->belongsToMany(Genero::class, 'generos_peliculas');
-    }
 }

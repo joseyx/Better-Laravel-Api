@@ -11,9 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('generos_peliculas', function (Blueprint $table) {
-            $table->foreignId('genero_id')->constrained('generos');
-            $table->foreignId('pelicula_id')->constrained('peliculas');
+        Schema::table('peliculas', function (Blueprint $table) {
+            //
+            $table->string('color_fondo');
+            $table->string('color_texto');
+            $table->string('color_botones');
+            $table->string('color_extra');
         });
     }
 
@@ -22,6 +25,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('generos_peliculas');
+        Schema::table('peliculas', function (Blueprint $table) {
+            //
+        });
     }
 };

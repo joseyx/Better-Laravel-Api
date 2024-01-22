@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FullUserDataController;
+use App\Http\Controllers\GeneroController;
+use App\Http\Controllers\PeliculaController;
 use App\Http\Controllers\SalaDeCineController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -32,6 +34,10 @@ Route::group(['prefix' => 'dashboard'], function () {
     Route::post('sala/update/{id}', [SalaDeCineController::class, 'update']);
     Route::get('sala/{id}', [SalaDeCineController::class, 'show']);
     Route::get('salas', [SalaDeCineController::class, 'index']);
+    Route::post('pelicula/create', [PeliculaController::class, 'store']);
+    Route::get('peliculas', [PeliculaController::class, 'index']);
+    Route::get('pelicula/{id}', [PeliculaController::class, 'show']);
+    Route::delete('pelicula/delete/{id}', [PeliculaController::class, 'destroy']);
 });
 
 Route::group(['prefix' => 'auth'], function () {
