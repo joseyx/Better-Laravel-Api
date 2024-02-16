@@ -21,7 +21,13 @@ class Pelicula extends Model
         'color_botones',
         'color_extra1',
         'color_extra2',
+        'clasificacion',
+        'duracion'
     ];
+
+    public function horarios() {
+        return $this->hasMany(Horario::class);
+    }
 
     use HasFactory;
 

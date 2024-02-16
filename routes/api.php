@@ -3,8 +3,9 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FullUserDataController;
 use App\Http\Controllers\GeneroController;
+use App\Http\Controllers\HorarioController;
 use App\Http\Controllers\PeliculaController;
-use App\Http\Controllers\SalaDeCineController;
+use App\Http\Controllers\SalaController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Middleware\ThrottleRequests;
@@ -30,14 +31,18 @@ Route::group(['prefix' => 'dashboard'], function () {
     Route::get('users', [UserController::class, 'index']);
     Route::get('user/{id}', [UserController::class, 'show']);
     Route::post('user/{id}', [UserController::class, 'update']);
-    Route::post('sala/create', [SalaDeCineController::class, 'create']);
-    Route::post('sala/update/{id}', [SalaDeCineController::class, 'update']);
-    Route::get('sala/{id}', [SalaDeCineController::class, 'show']);
-    Route::get('salas', [SalaDeCineController::class, 'index']);
+    Route::post('sala/create', [SalaController::class, 'create']);
+    Route::post('sala/update/{id}', [SalaController::class, 'update']);
+    Route::get('sala/{id}', [SalaController::class, 'show']);
+    Route::get('salas', [SalaController::class, 'index']);
     Route::post('pelicula/create', [PeliculaController::class, 'store']);
     Route::get('peliculas', [PeliculaController::class, 'index']);
     Route::get('pelicula/{id}', [PeliculaController::class, 'show']);
     Route::delete('pelicula/delete/{id}', [PeliculaController::class, 'destroy']);
+    Route::post('horario', [HorarioController::class, 'create']);
+    Route::get('horarios', [HorarioController::class, 'index']);
+    Route::get('horario/{id}', [HorarioController::class, 'show']);
+    Route::post('entrada/{id}', [HorarioController::class, 'storeAsientos']);
 });
 
 Route::group(['prefix' => 'auth'], function () {

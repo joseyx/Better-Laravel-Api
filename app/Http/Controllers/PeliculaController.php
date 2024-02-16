@@ -39,6 +39,8 @@ class PeliculaController extends Controller
             'color_botones' => $request->color_botones,
             'color_extra1' => $request->color_extra1,
             'color_extra2' => $request->color_extra2,
+            'clasificacion' => $request->clasificacion,
+            'duracion' => $request->duracion
         ]);
 
         // Guarda la pelicula
@@ -56,8 +58,8 @@ class PeliculaController extends Controller
      */
     public function show(string $id)
     {
-        // Consigue una pelicula especifica por el id
-        $pelicula = Pelicula::find($id);
+        // Consigue una pelicula especifica por el id y con sus horarios
+        $pelicula = Pelicula::with('horarios')->find($id);
 
         if (!$pelicula) {
             return response()->json([
@@ -85,8 +87,11 @@ class PeliculaController extends Controller
         $pelicula->color_fondo = $request->color_fondo;
         $pelicula->color_texto = $request->color_texto;
         $pelicula->color_botones = $request->color_botones;
-        $pelicula->color_extra = $request->color_extra;
+        $pelicula->color_extra1 = $request->color_extra1;
         $pelicula->color_extra2 = $request->color_extra2;
+        $pelicula->genero = $request->genero;
+        $pelicula->clasificacion = $request->clasificacion;
+        $pelicula->duracion = $request->duracion;
 
         $pelicula->save();
 

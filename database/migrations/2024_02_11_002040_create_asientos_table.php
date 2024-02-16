@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('salas', function (Blueprint $table) {
-            $table->string('nombre');
-            $table->integer('filas');
-            $table->integer('asientos_por_fila');
-            $table->string('tipo');
+        Schema::create('asientos', function (Blueprint $table) {
             $table->id();
+            $table->string('identificador');
+            $table->boolean('disponible')->default(true);
+            $table->unsignedBigInteger('horario_id');
+            $table->foreign('horario_id')->references('id')->on('horarios')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('salas');
+        Schema::dropIfExists('asientos');
     }
 };

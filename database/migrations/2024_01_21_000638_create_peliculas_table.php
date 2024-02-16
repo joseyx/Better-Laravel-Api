@@ -18,6 +18,14 @@ return new class extends Migration
             $table->string('poster');
             $table->date('fecha_estreno');
             $table->timestamps();
+            $table->string('color_fondo');
+            $table->string('color_texto');
+            $table->string('color_botones');
+            $table->string('color_extra1');
+            $table->string('color_extra2');
+            $table->string('genero');
+            $table->string('clasificacion');
+            $table->string('duracion');
         });
     }
 
