@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Horario;
+use App\Models\User;
+use App\Notifications\EntradasCompradas;
+use Illuminate\Support\Facades\Notification;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 class HorarioController extends Controller
 {
     //create a new horario
@@ -106,23 +110,41 @@ class HorarioController extends Controller
     public function storeAsientos(Request $request, $id) {
         $horario = Horario::find($id);
 
+
+        //receive a list of asientos identificadores bought for a function
+        $asientos = $request->asientos;
+
+
         if (!$horario) {
             return response()->json([
                 'message' => 'Horario no encontrado'
             ], 404);
         }
-
-
-        //receive a list of asientos identificadores bought for a function
-        $asientos = $request->asientos;
+        //send email with qr code
+        $user = User::find($request->userId);
+        if (!$user) {
+            return response()->json([
+                'message' => 'Usuario no encontrado'
+            ], 404);
+        }
+        $user->notify(new EntradasCompradas($horario->id, $user->id, $asientos));
 
         // cambia el estado disponible de los asientos con el identifiador
         foreach ($asientos as $asiento) {
             $horario->asientos()->where('identificador', $asiento)->update(['disponible' => false]);
         }
 
+
         return response()->json([
             'message' => 'Asientos comprados'
         ], 200);
+    }
+
+    //test qr
+    public function testQr() {
+        $test = 'Test';
+        $qr = QrCode::size(300)->generate('test');
+
+        return response($qr);
     }
 }

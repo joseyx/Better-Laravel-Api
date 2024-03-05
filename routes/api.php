@@ -1,11 +1,10 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\FullUserDataController;
-use App\Http\Controllers\GeneroController;
 use App\Http\Controllers\HorarioController;
 use App\Http\Controllers\PeliculaController;
 use App\Http\Controllers\SalaController;
+use App\Http\Controllers\TrailerController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Middleware\ThrottleRequests;
@@ -43,6 +42,10 @@ Route::group(['prefix' => 'dashboard'], function () {
     Route::get('horarios', [HorarioController::class, 'index']);
     Route::get('horario/{id}', [HorarioController::class, 'show']);
     Route::post('entrada/{id}', [HorarioController::class, 'storeAsientos']);
+    Route::get('trailers', [TrailerController::class, 'index']);
+    Route::post('trailer', [TrailerController::class, 'create']);
+    Route::delete('trailer/{id}', [TrailerController::class, 'destroy']);
+    Route::get('qr', [HorarioController::class, 'testQr']);
 });
 
 Route::group(['prefix' => 'auth'], function () {
